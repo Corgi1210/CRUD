@@ -1,4 +1,4 @@
-package com.example.crud
+package com.hfad.tasks
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import com.example.crud.databinding.FragmentEditTaskBinding
+import com.hfad.tasks.databinding.FragmentEditTaskBinding
 
 class EditTaskFragment : Fragment() {
     private var _binding: FragmentEditTaskBinding? = null
@@ -24,7 +24,8 @@ class EditTaskFragment : Fragment() {
         val dao = TaskDatabase.getInstance(application).taskDao
 
         val viewModelFactory = EditTaskViewModelFactory(taskId, dao)
-        val viewModel = ViewModelProvider(this, viewModelFactory)[EditTaskViewModel::class.java]
+        val viewModel = ViewModelProvider(this, viewModelFactory)
+            .get(EditTaskViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         viewModel.navigateToList.observe(viewLifecycleOwner, Observer { navigate ->
